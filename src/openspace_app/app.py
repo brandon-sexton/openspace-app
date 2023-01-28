@@ -3,9 +3,10 @@ from threading import Timer
 
 import dash
 import dash_bootstrap_components as dbc
+import flask
 from dash import Dash, dcc, html
 
-app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.CYBORG])
+app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.CYBORG], server=flask.Flask(__name__))
 
 content_column = dbc.Col(
     [
