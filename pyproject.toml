@@ -1,9 +1,14 @@
 [project]
 name = "openspace-app"
 version = "0.1.0"
-description = "web app for openspace python package"
+description = "web applicationpip  for openspace python package"
 readme = "README.md"
 requires-python = ">=3.8"
+dependencies = [
+    "dash",
+    "openspace",
+    "dash_bootstrap_components"
+]
 license = {file = "LICENSE"}
 authors = [
   {name = "Brandon Sexton", email = "brandon.sexton.1@outlook.com" }
