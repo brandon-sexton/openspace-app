@@ -14,6 +14,16 @@ authors = [
   {name = "Brandon Sexton", email = "brandon.sexton.1@outlook.com" }
 ]
 
+[project.optional-dependencies]
+dev = [
+    "poetry",
+    "black",
+    "pre-commit",
+    "isort",
+    "mypy",
+    "flake8"
+]
+
 [project.urls]
 "Documentation" = "https://www.openspace-docs.com/"
 "Application" = "https://www.openspace-app.com/"
