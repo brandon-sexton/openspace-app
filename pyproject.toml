@@ -1,0 +1,39 @@
+[project]
+name = "openspace-app"
+version = "0.1.0"
+description = "web app for openspace python package"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+authors = [
+  {name = "Brandon Sexton", email = "brandon.sexton.1@outlook.com" }
+]
+
+[project.urls]
+"Documentation" = "https://www.openspace-docs.com/"
+"Application" = "https://www.openspace-app.com/"
+"App Repository" = "https://github.com/brandon-sexton/openspace-app"
+"Backend Repository" = "https://github.com/brandon-sexton/openspace"
+
+[build-system]
+requires = ["setuptools>=43.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 120
+force-exclude = '''
+^/(
+  (
+      \.eggs
+    | \.git
+    | \.pytest_cache
+    | \.tox
+    | dist
+  )/
+)
+'''
+
+[tool.isort]
+profile = "black"
+filter_files = true
+line_length = 120
