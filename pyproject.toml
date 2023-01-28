@@ -1,13 +1,13 @@
 [project]
 name = "openspace-app"
 version = "0.1.0"
-description = "web applicationpip  for openspace python package"
+description = "web application  for openspace python package"
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
     "dash",
     "openspace",
-    "dash_bootstrap_components"
+    "dash-bootstrap-components"
 ]
 license = {file = "LICENSE"}
 authors = [
