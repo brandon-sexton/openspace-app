@@ -53,4 +53,4 @@ def run():
     app.run(host=host, port=port, debug=False)
 
 if __name__ == '__main__':
-    app.run_server()
+    run()
