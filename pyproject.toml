@@ -1,6 +1,6 @@
 [project]
 name = "openspace-app"
-version = "0.1.1"
+version = "0.1.2"
 description = "web application  for openspace python package"
 readme = "README.md"
 requires-python = ">=3.8"

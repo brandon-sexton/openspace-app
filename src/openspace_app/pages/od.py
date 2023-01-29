@@ -7,6 +7,8 @@ from openspace.coordinates.states import GCRF, HCW, StateConvert
 from openspace.math.linalg import Vector3D, Vector6D
 from openspace.time import Epoch
 
+from openspace_app.configs import CONTENT_STYLE, LAYOUT_BG_STYLE, NAV_STYLE
+
 register_page(__name__, title="State Estimation", name="State Estimation")
 
 nav_column = dbc.Col(
@@ -16,11 +18,14 @@ nav_column = dbc.Col(
             dbc.NavItem(dbc.NavLink("Relative Motion", href="/cw")),
             dbc.NavItem(dbc.NavLink("Inertial View", href="/inertial")),
             dbc.NavItem(dbc.NavLink("State Estimation", href="/od")),
+            dbc.NavItem(dbc.NavLink("Documentation", href="https://www.openspace-docs.com")),
+            dbc.NavItem(dbc.NavLink("Source Code", href="https://github.com/brandon-sexton/")),
         ],
         vertical="sm",
         pills=True,
     ),
     width="auto",
+    style=NAV_STYLE,
 )
 
 figure = {
@@ -41,16 +46,25 @@ layout = html.Div(
             nav_column,
             dbc.Col(
                 [
-                    html.H2("Filter Performance"),
-                    dcc.Graph(id="od-plot", responsive=True, style={"width": "100%", "height": "100%"}, figure=figure),
-                ]
+                    html.Div(
+                        [
+                            html.H2("Filter Performance"),
+                            html.P(
+                                "This page shows how well the chase vehicle is able to estimate the state of the \
+                                target given the pre-defined relative state. Ideally, the observed state would always \
+                                be on top of truth.  The greater the difference in the observed and truth state, the \
+                                worse the profile is for state estimation."
+                            ),
+                        ]
+                    ),
+                    dcc.Graph(id="od-plot", responsive=True, style={"width": "100%", "height": "80%"}, figure=figure),
+                ],
+                style=CONTENT_STYLE,
             ),
         ],
-        style={
-            "width": "100%",
-            "height": "100vh",
-        },
+        style={"height": "100%"},
     ),
+    style=LAYOUT_BG_STYLE,
 )
 
 

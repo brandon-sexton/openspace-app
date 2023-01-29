@@ -7,6 +7,8 @@ from openspace.math.constants import BASE_IN_KILO, SECONDS_IN_DAY
 from openspace.math.linalg import Vector6D
 from openspace.propagators.relative import Hill
 
+from openspace_app.configs import CONTENT_STYLE, LAYOUT_BG_STYLE, NAV_STYLE
+
 register_page(__name__, title="Relative Motion", name="Relative Motion")
 
 figure = {
@@ -33,24 +35,35 @@ nav_column = dbc.Col(
             dbc.NavItem(dbc.NavLink("Relative Motion", href="/cw")),
             dbc.NavItem(dbc.NavLink("Inertial View", href="/inertial")),
             dbc.NavItem(dbc.NavLink("State Estimation", href="/od")),
+            dbc.NavItem(dbc.NavLink("Documentation", href="https://www.openspace-docs.com")),
+            dbc.NavItem(dbc.NavLink("Source Code", href="https://github.com/brandon-sexton/")),
         ],
         vertical="sm",
         pills=True,
     ),
     width="auto",
+    style=NAV_STYLE,
 )
 
 content_column = dbc.Col(
     [
-        html.H2("3-D Relative Motion Visualization and Planning"),
+        html.Div(
+            [
+                html.H2("3-D Relative Motion Visualization and Planning"),
+                html.P(
+                    "These values are relative to the target state defined in the dashboard tab.  Input various values \
+                    to see how state estimation ability changes."
+                ),
+            ]
+        ),
         dbc.InputGroup(
             [
-                dbc.Input(id="r-pos-input", type="number", value=0, persistence=True, style={"width": "16.666%"}),
+                dbc.Input(id="r-pos-input", type="number", value=-5, persistence=True, style={"width": "16.666%"}),
                 dbc.Input(id="i-pos-input", type="number", value=0, persistence=True, style={"width": "16.666%"}),
                 dbc.Input(id="c-pos-input", type="number", value=0, persistence=True, style={"width": "16.666%"}),
                 dbc.Input(id="r-vel-input", type="number", value=0, persistence=True, style={"width": "16.666%"}),
                 dbc.Input(id="i-vel-input", type="number", value=0, persistence=True, style={"width": "16.666%"}),
-                dbc.Input(id="c-vel-input", type="number", value=0, persistence=True, style={"width": "16.666%"}),
+                dbc.Input(id="c-vel-input", type="number", value=1, persistence=True, style={"width": "16.666%"}),
             ]
         ),
         dbc.InputGroup(
@@ -68,20 +81,22 @@ content_column = dbc.Col(
             responsive=True,
             style={
                 "width": "100%",
-                "height": "100%",
+                "height": "70%",
             },
             figure=figure,
         ),
-    ]
+    ],
+    style=CONTENT_STYLE,
 )
 layout = html.Div(
     dbc.Row(
         [nav_column, content_column],
         style={
             "width": "100%",
-            "height": "100vh",
+            "height": "100%",
         },
     ),
+    style=LAYOUT_BG_STYLE,
 )
 
 

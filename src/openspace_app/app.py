@@ -6,6 +6,8 @@ import dash_bootstrap_components as dbc
 import flask
 from dash import Dash, dcc, html
 
+from openspace_app.configs import LAYOUT_BG_STYLE
+
 app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.CYBORG], server=flask.Flask(__name__))
 
 content_column = dbc.Col(
@@ -32,7 +34,9 @@ content_column = dbc.Col(
         dash.page_container,
     ],
 )
-app.layout = html.Div([html.H1("openspace toolkit"), dbc.Row([content_column])])
+app.layout = html.Div(
+    [html.H1("openspace toolkit", style={"margin-left": "5%"}), dbc.Row([content_column])], style=LAYOUT_BG_STYLE
+)
 
 
 def run():

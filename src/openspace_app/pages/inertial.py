@@ -7,6 +7,8 @@ from openspace.coordinates.states import GCRF, HCW, StateConvert
 from openspace.math.linalg import Vector3D, Vector6D
 from openspace.time import Epoch
 
+from openspace_app.configs import CONTENT_STYLE, LAYOUT_BG_STYLE, NAV_STYLE
+
 register_page(__name__, title="Inertial", name="Inertial")
 
 figure = {
@@ -29,11 +31,14 @@ nav_column = dbc.Col(
             dbc.NavItem(dbc.NavLink("Relative Motion", href="/cw")),
             dbc.NavItem(dbc.NavLink("Inertial View", href="/inertial")),
             dbc.NavItem(dbc.NavLink("State Estimation", href="/od")),
+            dbc.NavItem(dbc.NavLink("Documentation", href="https://www.openspace-docs.com")),
+            dbc.NavItem(dbc.NavLink("Source Code", href="https://github.com/brandon-sexton/")),
         ],
         vertical="sm",
         pills=True,
     ),
     width="auto",
+    style=NAV_STYLE,
 )
 
 layout = html.Div(
@@ -42,24 +47,28 @@ layout = html.Div(
             nav_column,
             dbc.Col(
                 [
-                    html.H2("Inertial Visualization"),
+                    html.Div(
+                        [
+                            html.H2("Inertial Visualization"),
+                            html.P("This view shows how the target and chase state look independent of each other."),
+                        ]
+                    ),
                     dcc.Graph(
                         id="eci-plot",
                         responsive=True,
                         style={
                             "width": "100%",
-                            "height": "100%",
+                            "height": "80%",
                         },
                         figure=figure,
                     ),
-                ]
+                ],
+                style=CONTENT_STYLE,
             ),
         ],
-        style={
-            "width": "100%",
-            "height": "100vh",
-        },
+        style={"height": "100%"},
     ),
+    style=LAYOUT_BG_STYLE,
 )
 
 
