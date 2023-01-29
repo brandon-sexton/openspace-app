@@ -35,7 +35,14 @@ content_column = dbc.Col(
     ],
 )
 app.layout = html.Div(
-    [html.H1("openspace toolkit", style={"margin-left": "5%"}), dbc.Row([content_column])], style=LAYOUT_BG_STYLE
+    [
+        html.Img(
+            src=dash.get_asset_url("openspace-header.png"),
+            style={"width": "100%", "margin-bottom": "1%", "background-color": "#010332"},
+        ),
+        dbc.Row([content_column]),
+    ],
+    style=LAYOUT_BG_STYLE,
 )
 
 

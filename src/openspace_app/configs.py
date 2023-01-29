@@ -1,15 +1,18 @@
 NAV_STYLE = {
-    "background-color": "#4d004d",
+    "background-color": "#010332",
     "borderRadius": "15px",
     "margin-left": "5%",
     "margin-right": "1%",
-    "box-shadow": "2px 2px 2px #1a001a",
+    "margin-bottom": "5%",
+    "box-shadow": "2px 2px 2px #fc01fe",
+    "height": "95",
 }
-LAYOUT_BG_STYLE = {"background-color": "#330033", "height": "100vh"}
+LAYOUT_BG_STYLE = {"background-color": "black", "height": "100vh"}
 CONTENT_STYLE = {
-    "background-color": "#4d004d",
+    "background-color": "#010332",
     "borderRadius": "15px",
     "margin-right": "5%",
-    "box-shadow": "2px 2px 2px #1a001a",
-    "height": "100%",
+    "margin-bottom": "5%",
+    "box-shadow": "2px 2px 2px #fc01fe",
+    "height": "95%",
 }

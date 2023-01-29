@@ -101,6 +101,11 @@ config_accordion = dbc.Accordion(
                         ),
                     ],
                 ),
+                dbc.Button(
+                    id="tle-button",
+                    children=[dcc.Upload(html.A("Load a TLE"))],
+                    style={"border-color": "#80ffff", "background-color": "black", "color": "#80ffff"},
+                ),
             ],
             title="Target State",
         ),
