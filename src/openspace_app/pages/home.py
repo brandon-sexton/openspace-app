@@ -13,9 +13,7 @@ config_accordion = dbc.Accordion(
     [
         dbc.AccordionItem(
             [
-                html.P(
-                    "The times defined here will dictate the start and stop for all propagation.  Inputs are in TDT."
-                ),
+                html.P("This epoch represents the time at which the target state is valid.  Inputs are in TDT."),
                 dbc.InputGroup(
                     [
                         dbc.Input(
@@ -49,7 +47,7 @@ config_accordion = dbc.Accordion(
                     ],
                 ),
             ],
-            title="Window",
+            title="Epoch",
         ),
         dbc.AccordionItem(
             [
