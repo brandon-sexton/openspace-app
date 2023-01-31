@@ -6,49 +6,50 @@ import dash_bootstrap_components as dbc
 import flask
 from dash import Dash, dcc, html
 
-from openspace_app.configs import LAYOUT_BG_STYLE
-
-app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.CYBORG], server=flask.Flask(__name__))
-
-content_column = dbc.Col(
-    [
-        dcc.Store(id="r-pos", storage_type="local", data=0),
-        dcc.Store(id="i-pos", storage_type="local", data=0),
-        dcc.Store(id="c-pos", storage_type="local", data=0),
-        dcc.Store(id="r-vel", storage_type="local", data=0),
-        dcc.Store(id="i-vel", storage_type="local", data=0),
-        dcc.Store(id="c-vel", storage_type="local", data=0),
-        dcc.Store(id="year", storage_type="local", data=0),
-        dcc.Store(id="month", storage_type="local", data=0),
-        dcc.Store(id="day", storage_type="local", data=0),
-        dcc.Store(id="hour", storage_type="local", data=0),
-        dcc.Store(id="minute", storage_type="local", data=0),
-        dcc.Store(id="second", storage_type="local", data=0),
-        dcc.Store(id="target-x", storage_type="local", data=0),
-        dcc.Store(id="target-y", storage_type="local", data=0),
-        dcc.Store(id="target-z", storage_type="local", data=0),
-        dcc.Store(id="target-vx", storage_type="local", data=0),
-        dcc.Store(id="target-vy", storage_type="local", data=0),
-        dcc.Store(id="target-vz", storage_type="local", data=0),
-        dcc.Store(id="sma", storage_type="local", data=0),
-        dash.page_container,
-    ],
+app = Dash(
+    __name__,
+    use_pages=True,
+    external_stylesheets=[dbc.themes.BOOTSTRAP, "\\assets\\css\\custom-style.css"],
+    server=flask.Flask(__name__),
 )
-app.layout = html.Div(
+
+app.layout = dbc.Container(
     [
-        html.Img(
-            src=dash.get_asset_url("openspace-header.png"),
-            style={"width": "100%", "margin-bottom": "1%", "background-color": "#010332"},
+        html.Br(),
+        dbc.Row(
+            html.Img(className="header-img", src=dash.get_asset_url("img/openspace-header.png")),
         ),
-        dbc.Row([content_column]),
+        dbc.Row(
+            dash.page_container,
+        ),
+        dcc.Store(id="r-pos", storage_type="session", data=0),
+        dcc.Store(id="i-pos", storage_type="session", data=0),
+        dcc.Store(id="c-pos", storage_type="session", data=0),
+        dcc.Store(id="r-vel", storage_type="session", data=0),
+        dcc.Store(id="i-vel", storage_type="session", data=0),
+        dcc.Store(id="c-vel", storage_type="session", data=0),
+        dcc.Store(id="target-epoch-input", storage_type="session", data=0),
+        dcc.Store(id="target-epoch", storage_type="session", data=0),
+        dcc.Store(id="year-input", storage_type="session", data=0),
+        dcc.Store(id="month-input", storage_type="session", data=0),
+        dcc.Store(id="day-input", storage_type="session", data=0),
+        dcc.Store(id="hour-input", storage_type="session", data=0),
+        dcc.Store(id="minute-input", storage_type="session", data=0),
+        dcc.Store(id="second-input", storage_type="session", data=0),
+        dcc.Store(id="target-x", storage_type="session", data=0),
+        dcc.Store(id="target-y", storage_type="session", data=0),
+        dcc.Store(id="target-z", storage_type="session", data=0),
+        dcc.Store(id="target-vx", storage_type="session", data=0),
+        dcc.Store(id="target-vy", storage_type="session", data=0),
+        dcc.Store(id="target-vz", storage_type="session", data=0),
+        dcc.Store(id="sma", storage_type="session", data=0),
     ],
-    style=LAYOUT_BG_STYLE,
 )
 
 
 def run():
     host = "localhost"
-    port = 8080
+    port = 8888
     url = f"http://{host}:{port}"
     Timer(10, webbrowser.open_new(url))
 

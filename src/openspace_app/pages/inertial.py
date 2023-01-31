@@ -7,8 +7,6 @@ from openspace.coordinates.states import GCRF, HCW, StateConvert
 from openspace.math.linalg import Vector3D, Vector6D
 from openspace.time import Epoch
 
-from openspace_app.configs import CONTENT_STYLE, LAYOUT_BG_STYLE, NAV_STYLE
-
 register_page(__name__, title="Inertial", name="Inertial")
 
 figure = {
@@ -38,37 +36,34 @@ nav_column = dbc.Col(
         pills=True,
     ),
     width="auto",
-    style=NAV_STYLE,
 )
 
-layout = html.Div(
-    dbc.Row(
-        [
-            nav_column,
-            dbc.Col(
-                [
-                    html.Div(
-                        [
-                            html.H2("Inertial Visualization"),
-                            html.P("This view shows how the target and chase state look independent of each other."),
-                        ]
-                    ),
-                    dcc.Graph(
-                        id="eci-plot",
-                        responsive=True,
-                        style={
-                            "width": "100%",
-                            "height": "80%",
-                        },
-                        figure=figure,
-                    ),
-                ],
-                style=CONTENT_STYLE,
-            ),
-        ],
-        style={"height": "100%"},
-    ),
-    style=LAYOUT_BG_STYLE,
+layout = dbc.Container(
+    [
+        html.Br(),
+        dbc.Row(
+            [
+                nav_column,
+                dbc.Col(
+                    [
+                        html.Div(
+                            [
+                                html.H2("Inertial Visualization"),
+                                dbc.FormText(
+                                    "This view shows how the target and chase state look independent of each other."
+                                ),
+                            ]
+                        ),
+                        dcc.Graph(
+                            id="eci-plot", responsive=True, figure=figure, style={"width": "100%", "height": "80%"}
+                        ),
+                    ],
+                    className="content-container",
+                ),
+            ],
+            style={"height": "100vh"},
+        ),
+    ]
 )
 
 
@@ -81,12 +76,7 @@ layout = html.Div(
         Input("target-vx", "data"),
         Input("target-vy", "data"),
         Input("target-vz", "data"),
-        Input("year", "data"),
-        Input("month", "data"),
-        Input("day", "data"),
-        Input("hour", "data"),
-        Input("minute", "data"),
-        Input("second", "data"),
+        Input("target-epoch", "data"),
         Input("r-pos", "data"),
         Input("i-pos", "data"),
         Input("c-pos", "data"),
@@ -96,8 +86,8 @@ layout = html.Div(
     ],
     State("eci-plot", "figure"),
 )
-def update_plot(x, y, z, vx, vy, vz, yr, mon, day, hrs, mins, secs, r, i, c, vr, vi, vc, figure):
-    ep = Epoch.from_gregorian(yr, mon, day, hrs, mins, secs)
+def update_plot(x, y, z, vx, vy, vz, tgt_ep, r, i, c, vr, vi, vc, figure):
+    ep = Epoch(tgt_ep)
     tgt = Spacecraft(GCRF(ep, Vector3D(x, y, z), Vector3D(vx, vy, vz)))
     chase = Spacecraft(
         StateConvert.hcw.to_gcrf(HCW.from_state_vector(Vector6D(r, i, c, vr, vi, vc)), tgt.current_state())

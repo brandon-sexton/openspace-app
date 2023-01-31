@@ -7,8 +7,6 @@ from openspace.math.constants import BASE_IN_KILO, SECONDS_IN_DAY
 from openspace.math.linalg import Vector6D
 from openspace.propagators.relative import Hill
 
-from openspace_app.configs import CONTENT_STYLE, LAYOUT_BG_STYLE, NAV_STYLE
-
 register_page(__name__, title="Relative Motion", name="Relative Motion")
 
 figure = {
@@ -17,7 +15,6 @@ figure = {
         {"type": "scatter3d", "mode": "markers", "marker": {"color": "darkmagenta"}, "name": "Target"},
     ],
     "layout": go.Layout(
-        autosize=True,
         uirevision="constant",
         template="plotly_dark",
         scene={
@@ -42,7 +39,6 @@ nav_column = dbc.Col(
         pills=True,
     ),
     width="auto",
-    style=NAV_STYLE,
 )
 
 content_column = dbc.Col(
@@ -50,7 +46,7 @@ content_column = dbc.Col(
         html.Div(
             [
                 html.H2("3-D Relative Motion Visualization and Planning"),
-                html.P(
+                dbc.FormText(
                     "These values are relative to the target state defined in the dashboard tab.  Input various values \
                     to see how state estimation ability changes."
                 ),
@@ -66,37 +62,25 @@ content_column = dbc.Col(
                 dbc.Input(id="c-vel-input", type="number", value=1, persistence=True, style={"width": "16.666%"}),
             ]
         ),
-        dbc.InputGroup(
+        dbc.Row(
             [
-                dbc.InputGroupText(dcc.Markdown(r"$x (km)$", mathjax=True), style={"width": "16.666%"}),
-                dbc.InputGroupText(dcc.Markdown(r"$y (km)$", mathjax=True), style={"width": "16.666%"}),
-                dbc.InputGroupText(dcc.Markdown(r"$z (km)$", mathjax=True), style={"width": "16.666%"}),
-                dbc.InputGroupText(dcc.Markdown(r"$\dot x (\frac{m}{s})$", mathjax=True), style={"width": "16.666%"}),
-                dbc.InputGroupText(dcc.Markdown(r"$\dot y (\frac{m}{s})$", mathjax=True), style={"width": "16.666%"}),
-                dbc.InputGroupText(dcc.Markdown(r"$\dot z (\frac{m}{s})$", mathjax=True), style={"width": "16.666%"}),
-            ],
+                dbc.Col(dcc.Markdown(r"$x (km)$", mathjax=True)),
+                dbc.Col(dcc.Markdown(r"$y (km)$", mathjax=True)),
+                dbc.Col(dcc.Markdown(r"$z (km)$", mathjax=True)),
+                dbc.Col(dcc.Markdown(r"$\dot x (\frac{km}{s})$", mathjax=True)),
+                dbc.Col(dcc.Markdown(r"$\dot y (\frac{km}{s})$", mathjax=True)),
+                dbc.Col(dcc.Markdown(r"$\dot z (\frac{km}{s})$", mathjax=True)),
+            ]
         ),
-        dcc.Graph(
-            id="rel-plot",
-            responsive=True,
-            style={
-                "width": "100%",
-                "height": "70%",
-            },
-            figure=figure,
-        ),
+        dcc.Graph(id="rel-plot", responsive=True, figure=figure, style={"width": "100%", "height": "80%"}),
     ],
-    style=CONTENT_STYLE,
+    className="content-container",
 )
-layout = html.Div(
-    dbc.Row(
-        [nav_column, content_column],
-        style={
-            "width": "100%",
-            "height": "100%",
-        },
-    ),
-    style=LAYOUT_BG_STYLE,
+layout = dbc.Container(
+    [
+        html.Br(),
+        dbc.Row([nav_column, content_column], style={"height": "100vh"}),
+    ]
 )
 
 

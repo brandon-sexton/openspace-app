@@ -7,8 +7,6 @@ from openspace.coordinates.states import GCRF, HCW, StateConvert
 from openspace.math.linalg import Vector3D, Vector6D
 from openspace.time import Epoch
 
-from openspace_app.configs import CONTENT_STYLE, LAYOUT_BG_STYLE, NAV_STYLE
-
 register_page(__name__, title="State Estimation", name="State Estimation")
 
 nav_column = dbc.Col(
@@ -25,7 +23,6 @@ nav_column = dbc.Col(
         pills=True,
     ),
     width="auto",
-    style=NAV_STYLE,
 )
 
 figure = {
@@ -40,31 +37,35 @@ figure = {
         template="plotly_dark",
     ),
 }
-layout = html.Div(
-    dbc.Row(
-        [
-            nav_column,
-            dbc.Col(
-                [
-                    html.Div(
-                        [
-                            html.H2("Filter Performance"),
-                            html.P(
-                                "This page shows how well the chase vehicle is able to estimate the state of the \
-                                target given the pre-defined relative state. Ideally, the observed state would always \
-                                be on top of truth.  The greater the difference in the observed and truth state, the \
-                                worse the profile is for state estimation."
-                            ),
-                        ]
-                    ),
-                    dcc.Graph(id="od-plot", responsive=True, style={"width": "100%", "height": "80%"}, figure=figure),
-                ],
-                style=CONTENT_STYLE,
-            ),
-        ],
-        style={"height": "100%"},
-    ),
-    style=LAYOUT_BG_STYLE,
+layout = dbc.Container(
+    [
+        html.Br(),
+        dbc.Row(
+            [
+                nav_column,
+                dbc.Col(
+                    [
+                        html.Div(
+                            [
+                                html.H2("Filter Performance"),
+                                dbc.FormText(
+                                    "This page shows how well the chase vehicle is able to estimate the state of the \
+                                    target given the pre-defined relative state. Ideally, the observed state would \
+                                    always be on top of truth.  The greater the difference in the observed and \
+                                    truth state, the worse the profile is for state estimation."
+                                ),
+                            ]
+                        ),
+                        dcc.Graph(
+                            id="od-plot", responsive=True, style={"width": "100%", "height": "80%"}, figure=figure
+                        ),
+                    ],
+                    className="content-container",
+                ),
+            ],
+            style={"height": "100vh"},
+        ),
+    ]
 )
 
 
@@ -77,12 +78,7 @@ layout = html.Div(
         Input("target-vx", "data"),
         Input("target-vy", "data"),
         Input("target-vz", "data"),
-        Input("year", "data"),
-        Input("month", "data"),
-        Input("day", "data"),
-        Input("hour", "data"),
-        Input("minute", "data"),
-        Input("second", "data"),
+        Input("target-epoch", "data"),
         Input("r-pos", "data"),
         Input("i-pos", "data"),
         Input("c-pos", "data"),
@@ -92,8 +88,8 @@ layout = html.Div(
     ],
     State("od-plot", "figure"),
 )
-def update_plot(x, y, z, vx, vy, vz, yr, mon, day, hrs, mins, secs, r, i, c, vr, vi, vc, figure):
-    ep = Epoch.from_gregorian(yr, mon, day, hrs, mins, secs)
+def update_plot(x, y, z, vx, vy, vz, tgt_ep, r, i, c, vr, vi, vc, figure):
+    ep = Epoch(tgt_ep)
     tgt = Spacecraft(GCRF(ep, Vector3D(x, y, z), Vector3D(vx, vy, vz)))
     chase = Spacecraft(
         StateConvert.hcw.to_gcrf(HCW.from_state_vector(Vector6D(r, i, c, vr, vi, vc)), tgt.current_state())

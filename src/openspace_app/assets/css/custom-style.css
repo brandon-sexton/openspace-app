@@ -1,0 +1,128 @@
+:root {
+    --container-background: #010332;
+    --page-background: #32325d;
+    --container-shadow: #fc01fe;
+    --corner-radius: 5px;
+    --text-color: #03acda;
+    --default-font: "Lucida Console", monospace;
+    --error-color: rgb(235, 15, 15);
+}
+
+article,
+aside,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section {
+  display:block;
+}
+
+body {
+  margin: 0;
+  font-family: var(--default-font);
+  font-variant: small-caps;
+  font-size: large;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--text-color);
+  text-align: left;
+  background-color: var(--page-background);
+}
+
+.nav {
+    background-color: var(--container-background);
+    border-radius: var(--corner-radius);
+    padding-left: 5%;
+    padding-top: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+    box-shadow: 2px 2px 2px var(--container-shadow);
+    font-family: var(--default-font);
+    font-variant: small-caps;
+    width: 20vw;
+}
+
+.nav-link {
+    display: block;
+    color: var(--text-color);
+    border-color: var(--container-shadow);
+}
+
+.nav-link:hover,
+.nav-link:focus {
+    text-decoration: none;
+    border: solid;
+    border-spacing: 0;
+    border-color: var(--container-shadow);
+}
+
+.content-container {
+    background-color: var(--container-background);
+    border-radius: var(--corner-radius);
+    padding-left: 5%;
+    padding-top: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+    box-shadow: 2px 2px 2px var(--container-shadow);
+    font-family: var(--default-font);
+    font-variant: small-caps;
+}
+
+.header-img {
+    width: 100%;
+    background-color: var(--container-background);
+    border-radius: var(--corner-radius);
+    box-shadow: 2px 2px 2px #fc01fe;
+    padding: 0%;
+}
+
+.vector6d-field {
+    width: 16.66666%;
+    text-align: center;
+}
+
+input[type="text"].epoch-input {
+    border: solid;
+    border-color: var(--container-background);
+    background-color:var(--page-background);
+    color: var(--container-shadow);
+}
+
+input[type="text"].epoch-input.is-invalid {
+    border: solid;
+    border-color: var(--error-color);
+    background-color:var(--page-background);
+}
+
+.accordion {
+    background-color: var(--container-background);
+}
+
+.accordion-button {
+    border: solid;
+    border-color: var(--text-color);
+    background-color: var(--page-background);
+    color: var(--text-color);
+    font-family: var(--default-font);
+    font-variant: small-caps;
+    font-size: large;
+    font-weight: 600;
+}
+
+.accordion-button:not(.collapsed) {
+    border: solid;
+    border-color: var(--container-shadow);
+    background-color: var(--page-background);
+    color: var(--text-color);
+}
+
+.accordion-item {
+    border: solid;
+    border-color: var(--text-color);
+    background-color: var(--container-background);
+    color: var(--text-color);
+}
