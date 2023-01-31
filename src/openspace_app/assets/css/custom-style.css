@@ -85,6 +85,11 @@ body {
     text-align: center;
 }
 
+.popover > .epoch-warning {
+    background-color: var(--page-background);
+    color: var(--text-color);
+}
+
 input[type="text"].epoch-input {
     border: solid;
     border-color: var(--container-background);

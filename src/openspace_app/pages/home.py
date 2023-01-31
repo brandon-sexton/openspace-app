@@ -12,11 +12,18 @@ config_accordion = dbc.Accordion(
         dbc.AccordionItem(
             [
                 dbc.Label("Target Epoch"),
-                dbc.Input(id="target-epoch-input", persistence=True, type="text", className="epoch-input"),
+                dbc.Input(
+                    id="target-epoch-input",
+                    persistence=True,
+                    type="text",
+                    className="epoch-input",
+                    value="2023-01-30 12:00:00",
+                ),
                 dbc.FormText(
                     "This epoch represents the time at which the target state is valid.  Inputs are in Terrestrial \
-                        Dynamic Time (TDT)."
+                    Dynamic Time (TDT).  "
                 ),
+                dbc.Label("Format:  YYYY-MM-DD hh:mm:ss"),
             ],
             title="Epochs",
         ),
