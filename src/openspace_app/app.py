@@ -11,6 +11,8 @@ app = Dash(
     use_pages=True,
     external_stylesheets=[dbc.themes.BOOTSTRAP, "\\assets\\css\\custom-style.css"],
     server=flask.Flask(__name__),
+    title="OTK - Home",
+    meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
 )
 
 app.layout = dbc.Container(
@@ -28,7 +30,6 @@ app.layout = dbc.Container(
         dcc.Store(id="r-vel", storage_type="session", data=0),
         dcc.Store(id="i-vel", storage_type="session", data=0),
         dcc.Store(id="c-vel", storage_type="session", data=0),
-        dcc.Store(id="target-epoch-input", storage_type="session", data=0),
         dcc.Store(id="target-epoch", storage_type="session", data=0),
         dcc.Store(id="year-input", storage_type="session", data=0),
         dcc.Store(id="month-input", storage_type="session", data=0),

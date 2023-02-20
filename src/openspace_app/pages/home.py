@@ -6,7 +6,16 @@ from openspace.math.functions import EquationsOfMotion
 from openspace.math.linalg import Vector3D, Vector6D
 from openspace.time import Epoch
 
-register_page(__name__, path="/", title="Dashboard", name="Dashboard")
+from openspace_app.widgets import nav_column
+
+register_page(
+    __name__,
+    path="/",
+    title="OTK - Home",
+    name="dashboard",
+    meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
+)
+
 config_accordion = dbc.Accordion(
     [
         dbc.AccordionItem(
@@ -112,22 +121,6 @@ content_column = dbc.Col(
     className="content-container",
 )
 
-nav_column = dbc.Col(
-    dbc.Nav(
-        [
-            dbc.NavItem(dbc.NavLink("Dashboard", href="/")),
-            dbc.NavItem(dbc.NavLink("Relative Motion", href="/cw")),
-            dbc.NavItem(dbc.NavLink("Inertial View", href="/inertial")),
-            dbc.NavItem(dbc.NavLink("State Estimation", href="/od")),
-            dbc.NavItem(dbc.NavLink("Documentation", href="https://www.openspace-docs.com")),
-            dbc.NavItem(dbc.NavLink("Source Code", href="https://github.com/brandon-sexton/")),
-        ],
-        vertical="sm",
-        pills=True,
-    ),
-    width="auto",
-)
-
 layout = dbc.Container([html.Br(), dbc.Row([nav_column, content_column])])
 
 
@@ -139,7 +132,7 @@ layout = dbc.Container([html.Br(), dbc.Row([nav_column, content_column])])
     Input("target-epoch-input", "value"),
     State("target-epoch", "data"),
 )
-def update_target_epoch(ep_str, tgt_ep):
+def update_target_epoch(ep_str: str, tgt_ep: Epoch):
 
     ep = tgt_ep
     invalid = False
@@ -177,9 +170,9 @@ def update_target_epoch(ep_str, tgt_ep):
                 invalid = True
 
     if not invalid:
-        ep = Epoch.from_gregorian(year, month, day, hrs, mins, secs)
+        ep = Epoch.from_gregorian(year, month, day, hrs, mins, secs).value
 
-    return invalid, ep
+    return ep, invalid
 
 
 @callback(

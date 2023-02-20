@@ -25,7 +25,7 @@ body {
   margin: 0;
   font-family: var(--default-font);
   font-variant: small-caps;
-  font-size: large;
+  font-size: 1.5vw;
   font-weight: 600;
   line-height: 1;
   color: var(--text-color);
@@ -44,6 +44,7 @@ body {
     font-family: var(--default-font);
     font-variant: small-caps;
     width: 20vw;
+    font-size: 1.5vw;
 }
 
 .nav-link {
@@ -81,8 +82,18 @@ body {
 }
 
 .vector6d-field {
-    width: 16.66666%;
+    width: 16.66666vw;
     text-align: center;
+    font-size: 1vw;
+}
+
+.input-text-label {
+    width: 20vw;
+    font-size: 1.25vw;
+}
+
+.input-text {
+    font-size: 1.25;
 }
 
 .popover > .epoch-warning {
@@ -114,7 +125,7 @@ input[type="text"].epoch-input.is-invalid {
     color: var(--text-color);
     font-family: var(--default-font);
     font-variant: small-caps;
-    font-size: large;
+    font-size: 1.5vw;
     font-weight: 600;
 }
 

@@ -7,23 +7,9 @@ from openspace.coordinates.states import GCRF, HCW, StateConvert
 from openspace.math.linalg import Vector3D, Vector6D
 from openspace.time import Epoch
 
-register_page(__name__, title="State Estimation", name="State Estimation")
+from openspace_app.widgets import nav_column
 
-nav_column = dbc.Col(
-    dbc.Nav(
-        [
-            dbc.NavItem(dbc.NavLink("Dashboard", href="/")),
-            dbc.NavItem(dbc.NavLink("Relative Motion", href="/cw")),
-            dbc.NavItem(dbc.NavLink("Inertial View", href="/inertial")),
-            dbc.NavItem(dbc.NavLink("State Estimation", href="/od")),
-            dbc.NavItem(dbc.NavLink("Documentation", href="https://www.openspace-docs.com")),
-            dbc.NavItem(dbc.NavLink("Source Code", href="https://github.com/brandon-sexton/")),
-        ],
-        vertical="sm",
-        pills=True,
-    ),
-    width="auto",
-)
+register_page(__name__, title="OTK - Estimation", name="estimation")
 
 figure = {
     "data": [
